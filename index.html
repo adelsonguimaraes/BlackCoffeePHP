@@ -1,0 +1,324 @@
+<html ng-app="blackcoffeephp">
+<head>
+	<title>BlackCoffeePHP</title>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<style type="text/css">
+		body {
+			background: #ddd;
+		}
+	</style>
+
+</head>
+<body ng-controller="main">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    	<div class="container" style="padding-top:15px; text-align:center; color:#fff;">
+	         <h4>BlackCoffeePHP 1.0</h4>
+	    </div>
+	</nav>
+	<br><br><br><br><br>
+	<div class="container" ng-if="proccess">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Processo em andamento... <img src="http://fm.gazetadigital.com.br/site/enquete/imagens/loading.gif"></h3>
+			</div>
+			<div class="panel-body">
+				<div ng-repeat="obj in andamento" ng-class="obj.bgclass" >
+					<div ng-class="obj.textclass" style="padding:10px;">
+						<span style="font-weight:bold; font-size:16px;" ng-bind="obj.msg"></span>
+						<span class="glyphicon" ng-class="obj.iconclass"></span>
+					</div>
+				</div>
+				<hr>
+				<br>
+				<div class="btn-group pull-right">
+					<button class="btn btn-default btn-lg" type="button" ng-click="gerar(conf)" ng-if="error">
+						Processar novamente
+					</button>
+					<button class="btn btn-danger btn-lg" type="button" ng-click="cancelar(conf)" ng-if="error">
+						Cancelar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container" ng-if="!proccess">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Configurações do Sistema<h3>
+				</div>
+				<div class="panel-body">
+					<form>
+						<h3>Informações para conexão com banco de dados <small>
+						<hr>
+						<div class="form-group">
+							Banco de Dados <span style="color:red;">*</span>
+							<select class="form-control" ng-model="conf.db">
+								<option value="mysql">MySQL</option>
+								<option value="postgresql" disabled>PostgreSQL - Não suportado</option>
+							</select>
+						</div>
+						<div class="form-group">
+							Host <span style="color:red;">*</span>
+							<input type="text" class="form-control" id="host" name="host" ng-model="conf.host">
+						</div>
+						<div class="form-group">
+							Usuário <span style="color:red;">*</span>
+							<input type="text" class="form-control" id="user" name="user" ng-model="conf.user">
+						</div>
+						<div class="form-group">
+							Senha <input type="text" class="form-control" id="senha" name="senha" ng-model="conf.senha">
+						</div>
+						<div class="form-group">
+							Nome do Banco  <span style="color:red;">*</span>
+							<input type="text" class="form-control" id="banco" name="banco"  ng-model="conf.banco">
+						</div>
+						<h3>Front-end <small> - Framework front-end que será utilizado nas telas</small></h3>
+						<hr>
+						<div class="form-group">
+							Escolha a tecnológia:
+							<select class="form-control" id="funcao" name="funcao"  ng-model="conf.front">
+								<option value="jquery">JQuery</option>
+								<option value="angularjs" disabled>AngularJs - Não suportado</option>
+								<option value="extjs" disabled>ExtJs - Não suportado</option>
+							</select>
+						</div>
+						<h3>Documentação <small> - Essas informações ficarão no topo de cada arquivo PHP</small></h3>
+						<hr>
+						<div class="form-group">
+							Projeto: <input type="text" class="form-control" id="projeto" name="projeto"  ng-model="conf.doc.projeto">
+						</div>
+						<div class="form-group">
+							Dono do Produto (P.O): <input type="text" class="form-control" id="po" name="po"  ng-model="conf.doc.po">
+						</div>
+						<div class="form-group">
+							Data Inicial: <input type="text" class="form-control" id="datainicio" name="datainicio"  ng-model="conf.doc.datainicio">
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" id="equipe" name="equipe"  ng-model="conf.equipe">
+						</div>
+						<h3>Equipe de Desenvolvimento</h3>
+						<hr>
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									Função:
+									<select class="form-control" id="funcao" name="funcao"  ng-model="membro.funcao">
+										<option value>Selecione a função</option>
+										<option value="Gerente de Projeto">Gerente de Projeto</option>
+										<option value="Gerente de Projeto">Gerente de Desenvolvimento</option>
+										<option value="Analista">Analista</option>
+										<option value="DBA">DBA</option>
+										<option value="Coordenador">Coordenador</option>
+										<option value="Desenvolvedor">Desenvolvedor</option>
+										<option value="Tester">Tester</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="form-group">
+									Nome: <input type="text" class="form-control" id="nome" name="nome"  ng-model="membro.nome">
+								</div>
+							</div>
+							<div class="col-md-2">
+								&nbsp;
+								<button class="btn btn-primary btn-block" type="button" ng-disabled="!membro.funcao || !membro.nome" ng-click="addmembro(membro)">Adicionar</button>
+							</div>
+						</div>
+
+						<div class="bg-danger" style="text-align:center;" ng-if="!equipe.length">
+							<p class="text-danger" style="padding:15px;">
+								<strong>Não há membros de equipe cadastrados</strong>
+							</p>
+						</div>
+						<div id="tableequipe" ng-if="equipe.length">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<td>Função</td>
+										<td>Nome</td>
+									</tr>
+								</thead>
+								<tbody id="tbody">
+									<tr ng-repeat="membro in equipe">
+										<td ng-bind="membro.funcao"></td>
+										<td ng-bind="membro.nome"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<br>
+						<button class="btn btn-success pull-right" type="button" id="gerar" name="gerar" ng-click="gerar(conf)" ng-disabled="!conf.db || !conf.host || !conf.user || !conf.banco">
+							Gerar Classes
+						</button>
+					</form>
+					<br>
+					<hr>
+					<h3>Classes que serão geradas.</h3>
+					<ul>
+						<li><label><strong>Conexão</strong> : Arquivo responsável pela comunicação com o banco de dados.</label></li>
+						<li><label><strong>Autoload</strong> : Arquivo responsável pelo carregamento de classes.</label></li>
+						<li><label><strong>Model</strong> : Arquivo model de cada classe.</label></li>
+						<li><label><strong>DAO</strong> : Arquivo DAO de cada classe.</label></li>
+						<li><label><strong>Control</strong> : Arquivo control de cada classe.</label></li>
+						<li><label><strong>Rest</strong> : Arquivo rest de cada classe.</label></li>
+						<li><label><strong>Teste</strong> : Arquivo teste de cada classe com JQuery.</label></li>
+					</ul>
+				</div>
+				<div class="panel-footer">
+					BlackCoffeePHP 1.0
+				</div>
+			</div>
+	</div>
+	<br><br><br><br><br>
+	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+    	<div class="container" style="padding-top:15px; text-align:center; color:#fff;">
+	         BlackCoffeePHP 2016 - by Adelson Guimarães
+	    </div>
+	</nav>
+
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" crossorigin="anonymous"></script>
+
+	<script type="text/javascript">
+		angular.module("blackcoffeephp", []);
+		angular.module("blackcoffeephp").controller("main", function ($scope, $http, $timeout) {
+			
+			function startConfig () {
+				$scope.andamento = [];
+				$scope.proccess = false;
+				$scope.membro = [];
+				$scope.conf = {
+					db : "mysql",
+					front : "jquery",
+					host   : "localhost",
+					user   : "root",
+					senha  : "",
+					banco  : "",
+					table : "",
+					fields : [],
+					doc: {
+						projeto : "",
+						po : "",
+						datainicio : "",
+						equipe : []
+					}
+				}
+				$scope.equipe = [];
+			}
+			startConfig();
+
+			var i = 0;
+			function http (obj, i) {
+				var metodos = [
+					"verificaDiretorio",
+					"criarModel",
+					"criarDAO",
+					"criarControl",
+					"criarRest",
+					"criarTeste",
+					"criarIndexTeste",
+					"criarAutoload",
+					"criarConexao"
+				];
+
+				$scope.proccess = true;
+
+				$http({
+		            method: 'POST',
+		            url: "dist/ini.php",
+		            data: {data : obj}
+		        })
+				.then(function successCallback(response) {
+	                var data = response.data;
+	                
+	                if(data.success){
+	                	var andamento = {
+	                		"msg": data.msg,
+	                		"bgclass" : "bg-success",
+	                		"textclass": "text-success",
+	                		"iconclass": "glyphicon-ok"
+	                	};
+
+	                	obj = data.data;
+	                	
+	                	$scope.andamento.push(andamento); 
+	                	$scope.proccess = true;
+
+	                	var audio = new Audio('dist/songs/success.mp3');
+		   				audio.volume = '0.1';
+		   				audio.play();
+
+	                	$timeout(function() {
+			                if (i<metodos.length) {
+								obj.metodo = metodos[i];
+								http(obj, i+1);
+							}else{
+								var andamento = {
+			                		"msg": "O processo de criação foi finalizado em 5 segundos você será redirecionado para a Home de Testes.",
+			                		"bgclass" : "bg-info",
+			                		"textclass": "text-info",
+			                		"iconclass": "glyphicon-open-file"
+			                	};
+			                	$scope.andamento.push(andamento); 
+
+			                	audio.play();
+
+			                	$timeout(function() {window.location.replace('src/teste')}, 5000);
+							}
+						}, 2000);
+
+	                }else{
+	                	var andamento = {
+	                		"msg": data.msg,
+	                		"bgclass" : "bg-danger",
+	                		"textclass": "text-danger",
+	                		"iconclass": "glyphicon-remove"
+	                	};
+
+	                	$scope.andamento.push(andamento); 
+	                	$scope.error = true;
+
+	                	var audio = new Audio('dist/songs/danger.mp3');
+		   				audio.volume = '0.1';
+		   				audio.play();
+	                }
+	            }, function errorCallback(response) {
+	            });
+			}
+
+			$scope.addmembro = function (obj) {
+				var membro = {
+					"funcao" : obj.funcao,
+					"nome" : obj.nome
+				}
+
+				$scope.equipe.push(membro);
+				$scope.membro = [];
+			}
+
+			$scope.gerar = function (obj) {
+				$scope.andamento = [];
+				
+				$scope.error = false;
+				
+				obj.doc.equipe = $scope.equipe;
+				obj.metodo ='verificaConexao';
+
+				http(obj, i);
+			}
+
+			$scope.cancelar = function () {
+				startConfig();
+			}
+		});
+	</script>
+</body>
+</html>
