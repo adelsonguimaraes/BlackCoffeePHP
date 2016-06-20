@@ -22,7 +22,6 @@ if(!$_POST){
 // ini
 $data = $_POST['data'];
 
-
 $obj = createObj($data);
 
 switch ($data['metodo']) {
@@ -107,6 +106,7 @@ function verificaConexao ($obj) {
 				if($row3->COLUMN_NAME == $row2->Field) {
 					$row2->fk = $row3->REFERENCED_TABLE_NAME;
 				}
+
 			}
 			array_push($table['fields'], $row2);
 		}
