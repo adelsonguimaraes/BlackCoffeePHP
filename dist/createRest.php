@@ -87,7 +87,7 @@ Class createRest {
 			}
 		}
 		$attrs = substr($attrs, 0, -2);
-		$text .= "	\$obj = new ".$obj['table']['name']."(\n";
+		$text .= "	\$obj = new ".ucfirst($obj['table']['name'])."(\n";
 		$text .= "		NULL,\n";
 		$text .= 		$attrs."\n";
 		$text .= "	);\n";
