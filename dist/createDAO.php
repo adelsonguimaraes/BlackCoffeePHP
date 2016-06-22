@@ -99,7 +99,7 @@ Class createDAO {
 		$text .= "		\$this->sql = sprintf(\"UPDATE ".$obj['table']['name']." SET ";
 		$objs = "";
 		foreach($obj['table']['fields'] as $key) {
-			if($key['Field'] != "id") {
+			if($key['Field'] != 'datacadastro' && $key['Field'] != "id") {
 				$text .=  $key['Field']. " = ". $this->getType ($key['Type']). ", ";
 				if($key['Field'] == "dataedicao") {
 					$objs .= "			mysqli_real_escape_string(\$this->con, date('Y-m-d')),\n";
