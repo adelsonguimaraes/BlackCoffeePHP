@@ -109,6 +109,8 @@ Class createExtViewForm {
 
 		if(strripos($type, "(")) $type = substr($type, 0, strripos($type, "("));
 		
+		$t = '';
+
 		if(!empty($obj['fk'])) {
 			$t .= "						xtype: 'combo',\n";
 			$t .= "						fieldLabel:'".ucfirst($obj['fk'])."',\n";
@@ -116,12 +118,13 @@ Class createExtViewForm {
 			$t .= "						emptyText:'Selecioone ".ucfirst($obj['fk'])."...',\n";
 			$t .= "						name: 'id".$obj['fk']."',\n";
 			$t .= "						allowBlank : false,\n";
-			$t .= "						store: 'Pais',\n";
+			$t .= "						store: '".ucfirst($obj['fk'])."',\n";
 			$t .= "						displayField: 'descricao',\n";
 			$t .= "						valueField: 'id'\n";
+
+			return $t;
 		}
 
-		$t = '';
 		if(
 			$type == "int" ||
 			$type == "tinyint" ||
