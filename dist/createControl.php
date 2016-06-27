@@ -65,12 +65,12 @@ Class createControl {
 		$text .= "		return \$this->objDAO->deletar(\$this->obj);\n";
 		$text .= "	}\n";
 
-		$text .= "	function listarPaginado ($start, $limit) {\n";
-		$text .= "	return $this->objDAO->listarPaginado($start, $limit);\n";
+		$text .= "	function listarPaginado (\$start, \$limit) {\n";
+		$text .= "	return \$this->objDAO->listarPaginado(\$start, \$limit);\n";
 		$text .= "	}\n";
 		
 		$text .= "	function qtdTotal () {\n";
-		$text .= "		return $this->objDAO->qtdTotal();\n";
+		$text .= "		return \$this->objDAO->qtdTotal();\n";
 		$text .= "	}\n";
 
 		$text .= "}\n";
