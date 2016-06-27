@@ -56,7 +56,7 @@ Class createExtViewForm {
 	    $text .= "				},\n";
 
 		foreach ($obj['table']['fields'] as $key) {
-			if($key['Field'] !== 'id') {
+			if($key['Field'] !== 'id' || $key['Field'] !== 'datacadastro' || $key['Field'] !== 'dataedicao') {
 				$text .= "				{\n";
 				$text .= $this->getType($key);
 				$text .= "				},\n";

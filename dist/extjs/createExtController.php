@@ -51,7 +51,7 @@ Class createExtController {
 		$this->writeDeletar ($fp, $obj);
 		$this->writeCancelar ($fp, $obj);
 
-		$text = "}\n";
+		$text = "});\n";
 		$text .= "\n// Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
@@ -95,7 +95,7 @@ Class createExtController {
 	function writeInit ($fp, $obj) {
 		$text = "	//init\n";
 		$text .= "	init: function(){\n";
-		$text .= "		this.controller({\n";
+		$text .= "		this.control({\n";
 		$text .= "			// '".$obj['table']['name']."grid dataview': {\n";
 		$text .= "			// 	itemdblclick: this.editar".ucfirst($obj['table']['name'])."\n";
 		$text .= "			// },\n";
@@ -275,7 +275,7 @@ Class createExtController {
 		$text .= "	delete".ucfirst($obj['table']['name']).": function(btn, e, opts){\n";
 		$text .= "		var form = this.getForm();\n";
 		$text .= "		var permissao = false;\n";
-		$text .= "		permissao = sgaf.util.telaUsuarioController.verify({'tela':'".$obj['table']['name']."crud','acao':'deletar'});\n";
+		$text .= "		permissao = sgaf.util.TelaUsuarioController.verify({'tela':'".$obj['table']['name']."crud','acao':'deletar'});\n";
 		$text .= "		if(!permissao) return false;\n";
 		
 		$text .= "		Ext.MessageBox.confirm('Atenção', 'Deseja realmente deletar?', function(botton){\n";
