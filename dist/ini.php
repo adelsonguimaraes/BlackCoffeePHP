@@ -18,6 +18,10 @@ require_once ("extjs/createExtModel.php");
 require_once ("extjs/createExtStore.php");
 require_once ("extjs/createExtController.php");
 require_once ("extjs/createExtViewForm.php");
+require_once ("extjs/createExtViewGrid.php");
+require_once ("extjs/createExtViewPanel.php");
+require_once ("extjs/createExtViewTabPanel.php");
+require_once ("extjs/createExtApp.php");
 
 if(!$_POST){
 	if($_GET) {$_POST = $_GET;}
@@ -170,12 +174,16 @@ function criarTeste ($obj) {
 		new createExtStore($data);
 		new createExtController($data);
 		new createExtViewForm($data);
+		new createExtViewGrid($data);
+		new createExtViewPanel($data);
+		new createExtViewTabPanel($data);
 	}
 	echo json_encode(array("success"=>true,"msg"=>"Analise e criação das classes \"Teste\" finalizado", "data"=>$obj));
 }
 
 function criarIndexTeste ($obj) {
 	new createIndexTeste($obj);
+	new createExtApp($obj);
 	
 	echo json_encode(array("success"=>true,"msg"=>"Criação da página \"Home de Testes\"", "data"=>$obj));
 
