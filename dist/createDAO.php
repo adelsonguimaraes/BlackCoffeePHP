@@ -218,7 +218,7 @@ Class createDAO {
 		$text .= "			die ( '[ERRO]: ' . mysqli_error ( \$this->con ) );\n";
 		$text .= "		}\n";
 		
-		$text .= "		\$lista = array();\n";
+		$text .= "		\$this->lista = array();\n";
 		
 		$text .= "		while ( \$row = mysqli_fetch_assoc ( \$result ) ) {\n";
 		$text .= "			\$this->lista=\$row;\n";
