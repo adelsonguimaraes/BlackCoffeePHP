@@ -3,6 +3,9 @@
 	Framework BlackCoffeePHP Gerador de Classes by Adelson Guimarães
 */
 
+// encoding
+header('Content-type: text/html; charset=UTF-8');
+
 Class createExtStore {
 	private $obj;
 

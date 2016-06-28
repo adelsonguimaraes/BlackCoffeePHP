@@ -3,7 +3,10 @@
 	Framework BlackCoffeePHP Gerador de Classes by Adelson Guimarães
 */
 
-//rquisições de classes
+// encoding
+header('Content-type: text/html; charset=UTF-8');
+
+//requisições de classes
 require_once ("config.php");
 require_once ("createConnection.php");
 require_once ("createAutoload.php");

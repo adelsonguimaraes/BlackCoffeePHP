@@ -3,6 +3,9 @@
 	Framework BlackCoffeePHP Gerador de Classes by Adelson Guimarães
 */
 
+// encoding
+header('Content-type: text/html; charset=UTF-8');
+
 Class createDAO {
 	private $obj;
 
@@ -208,40 +211,40 @@ Class createDAO {
 
 	function writeListarPaginado ($fp, $obj) {
 		$text = "	//listar paginado\n";
-		$text = "	function listarPaginado(\$start, \$limit) {\n";
-		$text = "		\$this->sql = \"SELECT * FROM ".$obj['table']['name']." limit \" . \$start . \", \" . \$limit;\n";
-		$text = "		\$result = mysqli_query ( \$this->con, \$this->sql );\n";
-		$text = "		if (! \$result) {\n";
-		$text = "			die ( '[ERRO]: ' . mysqli_error ( \$this->con ) );\n";
-		$text = "		}\n";
+		$text .= "	function listarPaginado(\$start, \$limit) {\n";
+		$text .= "		\$this->sql = \"SELECT * FROM ".$obj['table']['name']." limit \" . \$start . \", \" . \$limit;\n";
+		$text .= "		\$result = mysqli_query ( \$this->con, \$this->sql );\n";
+		$text .= "		if (! \$result) {\n";
+		$text .= "			die ( '[ERRO]: ' . mysqli_error ( \$this->con ) );\n";
+		$text .= "		}\n";
 		
-		$text = "		\$lista = array();\n";
+		$text .= "		\$lista = array();\n";
 		
-		$text = "		while ( \$row = mysqli_fetch_assoc ( \$result ) ) {\n";
-		$text = "			\$this->lista=\$row;\n";
-		$text = "		}\n";
-		$text = "		//teste\n";
-		$text = "		return \$this->lista;\n";
-		$text = "	}\n";
+		$text .= "		while ( \$row = mysqli_fetch_assoc ( \$result ) ) {\n";
+		$text .= "			\$this->lista=\$row;\n";
+		$text .= "		}\n";
+		$text .= "		//teste\n";
+		$text .= "		return \$this->lista;\n";
+		$text .= "	}\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
 	}
 
 	function writeQuantidadeTotal ($fp, $obj) {
 		$text = "	//quantidade total\n";
-		$text = "	function qtdTotal() {\n";
-		$text = "		\$this->sql = \"SELECT count(*) as quantidade FROM ".$obj['table']['name']."\";\n";
-		$text = "		\$result = mysqli_query ( \$this->con, \$this->sql );\n";
-		$text = "		if (! \$result) {\n";
-		$text = "			die ( '[ERRO]: ' . mysqli_error ( \$this->con ) );\n";
-		$text = "		}\n";
-		$text = "		\$total = 0;\n";
-		$text = "		while ( \$row = mysqli_fetch_object ( \$result ) ) {\n";
-		$text = "			\$total = \$row->quantidade;\n";
-		$text = "		}\n";
+		$text .= "	function qtdTotal() {\n";
+		$text .= "		\$this->sql = \"SELECT count(*) as quantidade FROM ".$obj['table']['name']."\";\n";
+		$text .= "		\$result = mysqli_query ( \$this->con, \$this->sql );\n";
+		$text .= "		if (! \$result) {\n";
+		$text .= "			die ( '[ERRO]: ' . mysqli_error ( \$this->con ) );\n";
+		$text .= "		}\n";
+		$text .= "		\$total = 0;\n";
+		$text .= "		while ( \$row = mysqli_fetch_object ( \$result ) ) {\n";
+		$text .= "			\$total = \$row->quantidade;\n";
+		$text .= "		}\n";
 		
-		$text = "		return \$total;\n";
-		$text = "	}\n";
+		$text .= "		return \$total;\n";
+		$text .= "	}\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
 	}

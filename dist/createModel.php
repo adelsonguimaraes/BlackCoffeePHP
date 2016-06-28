@@ -3,6 +3,10 @@
 	Framework BlackCoffeePHP Gerador de Classes by Adelson Guimarães
 */
 
+// encoding
+header('Content-type: text/html; charset=UTF-8');
+ini_set('default_charset','UTF-8');
+
 Class createModel {
 	private $obj;
 
