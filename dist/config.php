@@ -1,6 +1,6 @@
 <?php
 /*
-	Framework BlackCoffeePHP Gerador de Classes by Adelson Guimarães
+	Framework BlackCoffeePHP Gerador de Classes by Adelson Guimarães.
 */
 
 // encoding
