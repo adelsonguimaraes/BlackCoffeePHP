@@ -8,12 +8,12 @@ header('Content-type: text/html; charset=UTF-8');
 
 Class config implements jsonSerializable {
 	
-	static $host;
-	static $user;
-	static $senha;
-	static $banco;
-	static $table = array();
-	static $doc = array();
+	public $host;
+	public $user;
+	public $senha;
+	public $banco;
+	public $table = array();
+	public $doc = array();
 
 	// contrutor 
 	function __construct ($host=NULL, $user=NULL, $senha=NULL, $banco=NULL, $table=NULL, $doc=NULL) {

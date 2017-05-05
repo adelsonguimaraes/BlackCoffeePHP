@@ -126,10 +126,11 @@ function verificaConexao ($obj) {
 
 	}
 
-	echo json_encode(array("success"=>true,"msg"=>"Conexão com o banco de dados estabilizada", "data"=>$obj));
+	echo json_encode(array("success"=>true,"msg"=>"Conexao com o banco de dados estabilizada", "data"=>$obj));
 }
 
 function verificaDiretorio ($obj) {
+	
 	if(file_exists('../src')) {
 		echo json_encode(array("success"=>false,"msg"=>"Diretório \"src\" já existe, apague-o e tente novamente", "data"=>$obj));
 	}else{
