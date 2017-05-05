@@ -255,6 +255,8 @@
 					"criarConexao"
 				];
 
+				console.log( obj );
+
 				$scope.proccess = true;
 
 				$http({
@@ -264,7 +266,6 @@
 		        })
 				.then(function successCallback(response) {
 	                var data = response.data;
-	                
 	                if(data.success){
 	                	var andamento = {
 	                		"msg": data.msg,
@@ -288,7 +289,7 @@
 								http(obj, i+1);
 							}else{
 								var andamento = {
-			                		"msg": "O processo de criação foi finalizado em 5 segundos você será redirecionado para a Home de Testes.",
+			                		"msg": "O processo de criação foi finalizado, em 5 segundos você será redirecionado para a Home de Testes.",
 			                		"bgclass" : "bg-info",
 			                		"textclass": "text-info",
 			                		"iconclass": "glyphicon-open-file"
@@ -317,6 +318,7 @@
 		   				audio.play();
 	                }
 	            }, function errorCallback(response) {
+
 	            });
 			}
 
