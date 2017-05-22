@@ -8,10 +8,12 @@ header('Content-type: text/html; charset=UTF-8');
 
 //requisições de classes
 require_once ("config.php");
+require_once ("createResolve.php");
 require_once ("createConnection.php");
 require_once ("createAutoload.php");
 require_once ("createModel.php");
 require_once ("createDAO.php");
+require_once ("createSuperDAO.php");
 require_once ("createControl.php");
 require_once ("createRest.php");
 require_once ("createTeste.php");
@@ -66,6 +68,12 @@ switch ($data['metodo']) {
 		break;
 	case 'criarConexao':
 		criarConexao($obj);
+		break;
+	case 'criarResolve':
+		criarResolve($obj);
+		break;
+	case 'criarSuperDAO':
+		criarSuperDAO($obj);
 		break;
 }
 
@@ -201,6 +209,16 @@ function criarAutoload ($obj) {
 function criarConexao ($obj) {
 	new createConnection($obj);
 	echo json_encode(array("success"=>true,"msg"=>"Criação da Classe \"Conexão\"", "data"=>$obj));
+}
+
+function criarResolve ($obj) {
+	new createResolve($obj);
+	echo json_encode(array("success"=>true,"msg"=>"Criação da Classe \"Resolve\"", "data"=>$obj));
+}
+
+function criarSuperDAO ($obj) {
+	new createSuperDAO($obj);
+	echo json_encode(array("success"=>true,"msg"=>"Criação da Classe \"SuperDAO\"", "data"=>$obj));
 }
 
 
