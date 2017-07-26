@@ -33,28 +33,11 @@ Class createResolve {
 		$text .= "	Data Atual: ".$obj->doc['dataatual'].".\n"; 
 		$text .= "*/\n\n";
 
-		$text .= "Class ".ucfirst($this->className)."DAO {\n";
-		$text .= "	//atributos\n";
-		$text .= "	private \$con;\n";
-		$text .= "	private \$tabela;\n";
-    	$text .= "	private \$success = false;\n";
-    	$text .= "	private \$data;\n";
-    	$text .= "	private \$msg;\n";
-    	$text .= "	private \$total = 0;\n\n";
-
-		$text .= "	//construtor\n";
-		$text .= "	public function __construct(\$con) {\n";
-		$text .= "		\$this->con = \$con;\n";
-		$text .= "		\$this->tabela = \$tabela;\n";
-		$text .= "	}\n\n";
-		
 		$escreve = fwrite($fp, $text, strlen($text));
 
 		$this->writeResolve ( $fp );
 		
-		$text = "}\n\n";
-
-		$text .= "// Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães\n?>";
+		$text = "// Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães\n?>";
 
 		$escreve = fwrite($fp, $text, strlen($text));
 
