@@ -159,20 +159,21 @@ Class createDAO {
 		$text .= "		if(!\$result) {\n";
 		$text .= "			\$this->superdao->setMsg( resolve( mysqli_errno( \$this->con ), mysqli_error( \$this->con ), get_class( \$obj ), 'BuscarPorId' ) );\n";
 		$text .= "		}else{\n";
-		$text .= "			while(\$row = mysqli_fetch_object(\$resultSet)) {\n";
-		$objs = "";
-		foreach ($obj['table']['fields'] as $key) {
-			if(!empty($key['fk'])) {
-				$text .= "				//classe ".$key['fk']."\n";
-				$text .= "				\$control".ucfirst($key['fk'])." = new ".ucfirst($key['fk'])."Control(new ".ucfirst($key['fk'])."(\$row->".$key['Field']."));\n";
-				$text .= "				\$obj".ucfirst($key['fk'])." = \$control".ucfirst($key['fk'])."->buscarPorId();\n";
-				$objs .= "\$obj".ucfirst($key['fk']). ", ";
-			}else{
-				$objs .= "\$row->".$key['Field']. ", ";
-			}
-		}
-		$objs = substr($objs, 0 , -2) . "";
-		$text .= "				\$this->obj = new ".ucfirst($obj['table']['name'])."(".$objs.");\n";
+		$text .= "			while(\$row = mysqli_fetch_object(\$result)) {\n";
+		// $objs = "";
+		// foreach ($obj['table']['fields'] as $key) {
+		// 	if(!empty($key['fk'])) {
+		// 		$text .= "				//classe ".$key['fk']."\n";
+		// 		$text .= "				\$control".ucfirst($key['fk'])." = new ".ucfirst($key['fk'])."Control(new ".ucfirst($key['fk'])."(\$row->".$key['Field']."));\n";
+		// 		$text .= "				\$obj".ucfirst($key['fk'])." = \$control".ucfirst($key['fk'])."->buscarPorId();\n";
+		// 		$objs .= "\$obj".ucfirst($key['fk']). ", ";
+		// 	}else{
+		// 		$objs .= "\$row->".$key['Field']. ", ";
+		// 	}
+		// }
+		// $objs = substr($objs, 0 , -2) . "";
+		// $text .= "				\$this->obj = new ".ucfirst($obj['table']['name'])."(".$objs.");\n";
+		$text .= "				\$this->obj = \$row;\n";
 		
 		$text .= "			}\n";
 		$text .= "			\$this->superdao->setSuccess( true );\n";
@@ -186,7 +187,8 @@ Class createDAO {
 
 	function writeListar ($fp, $obj) {
 		$text = "	//listar\n";
-		$text .= "	function listar (".ucfirst($obj['table']['name'])." \$obj) {\n";
+		// $text .= "	function listar (".ucfirst($obj['table']['name'])." \$obj) {\n";
+		$text .= "	function listar () {\n";
 		$text .= "		\$this->sql = \"SELECT * FROM ".$obj['table']['name']."\";\n";
 		$text .= "		\$result = mysqli_query(\$this->con, \$this->sql);\n\n";
 
@@ -195,22 +197,23 @@ Class createDAO {
 		$text .= "		if(!\$result) {\n";
 		$text .= "			\$this->superdao->setMsg( resolve( mysqli_errno( \$this->con ), mysqli_error( \$this->con ), '".ucfirst($obj['table']['name'])."' , 'Listar' ) );\n";
 		$text .= "		}else{\n";
-		$text .= "			while(\$row = mysqli_fetch_object(\$resultSet)) {\n";
-		$objs = "";
-		foreach ($obj['table']['fields'] as $key) {
-			if(!empty($key['fk'])) {
-				$text .= "				//classe ".$key['fk']."\n";
-				$text .= "				\$control".ucfirst($key['fk'])." = new ".ucfirst($key['fk'])."Control(new ".ucfirst($key['fk'])."(\$row->".$key['Field']."));\n";
-				$text .= "				\$obj".ucfirst($key['fk'])." = \$control".ucfirst($key['fk'])."->buscarPorId();\n";
-				$objs .= "\$obj".ucfirst($key['fk']). ", ";
-			}else{
-				$objs .= "\$row->".$key['Field']. ", ";
-			}
-		}
-		$objs = substr($objs, 0 , -2) . "";
-		$text .= "				\$this->obj = new ".ucfirst($obj['table']['name'])."(".$objs.");\n";
+		$text .= "			while(\$row = mysqli_fetch_object(\$result)) {\n";
+		// $objs = "";
+		// foreach ($obj['table']['fields'] as $key) {
+		// 	if(!empty($key['fk'])) {
+		// 		$text .= "				//classe ".$key['fk']."\n";
+		// 		$text .= "				\$control".ucfirst($key['fk'])." = new ".ucfirst($key['fk'])."Control(new ".ucfirst($key['fk'])."(\$row->".$key['Field']."));\n";
+		// 		$text .= "				\$obj".ucfirst($key['fk'])." = \$control".ucfirst($key['fk'])."->buscarPorId();\n";
+		// 		$objs .= "\$obj".ucfirst($key['fk']). ", ";
+		// 	}else{
+		// 		$objs .= "\$row->".$key['Field']. ", ";
+		// 	}
+		// }
+		// $objs = substr($objs, 0 , -2) . "";
+		// $text .= "				\$this->obj = new ".ucfirst($obj['table']['name'])."(".$objs.");\n";
 		
-		$text .= "				array_push(\$this->lista, \$this->obj);\n";
+		// $text .= "				array_push(\$this->lista, \$this->obj);\n";
+		$text .= "				array_push(\$this->lista, \$row);\n";
 		$text .= "			}\n";
 		$text .= "			\$this->superdao->setSuccess( true );\n";
 		$text .= "			\$this->superdao->setData( \$this->lista );\n";

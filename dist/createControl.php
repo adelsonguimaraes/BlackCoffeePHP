@@ -57,7 +57,7 @@ Class createControl {
 		$text .= "	}\n";
 		
 		$text .= "	function listar () {\n";
-		$text .= "		return \$this->objDAO->listar(\$this->obj);\n";
+		$text .= "		return \$this->objDAO->listar();\n";
 		$text .= "	}\n";
 
 		$text .= "	function atualizar () {\n";

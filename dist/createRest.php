@@ -95,8 +95,10 @@ Class createRest {
 		$text .= 		$attrs."\n";
 		$text .= "	);\n";
 		$text .= "	\$control = new ".ucfirst($obj['table']['name'])."Control(\$obj);\n";
-		$text .= "	\$id = \$control->cadastrar();\n";
-		$text .= "	echo \$id;\n";
+		// $text .= "	\$id = \$control->cadastrar();\n";
+		// $text .= "	echo \$id;\n";
+		$text .= "	\$response = \$control->cadastrar();\n";
+		$text .= "	echo json_encode(\$response);\n";
 		$text .= "}\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
@@ -107,10 +109,12 @@ Class createRest {
 		$text = "function buscarPorId () {\n";
 		$text .= "	\$data = \$_POST['data'];\n";
 		$text .= "	\$control = new ".ucfirst($obj['table']['name'])."Control(new ".ucfirst($obj['table']['name'])."(\$data['id']));\n";
-		$text .= "	\$obj = \$control->buscarPorId();\n";
-		$text .= "	if(!empty(\$obj)) {\n";
-		$text .= "		echo json_encode(\$obj);\n";
-		$text .= "	}\n";
+		// $text .= "	\$obj = \$control->buscarPorId();\n";
+		// $text .= "	if(!empty(\$obj)) {\n";
+		// $text .= "		echo json_encode(\$obj);\n";
+		// $text .= "	}\n";
+		$text .= "	\$response = \$control->buscarPorId();\n";
+		$text .= "	echo json_encode(\$response);\n";
 		$text .= "}\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
@@ -120,10 +124,12 @@ Class createRest {
 	function writeListar ($fp, $obj) {
 		$text = "function listar () {\n";
 		$text .= "	\$control = new ".ucfirst($obj['table']['name'])."Control(new ".ucfirst($obj['table']['name']).");\n";
-		$text .= "	\$lista = \$control->listar();\n";
-		$text .= "	if(!empty(\$lista)) {\n";
-		$text .= "		echo json_encode(\$lista);\n";
-		$text .= "	}\n";
+		// $text .= "	\$lista = \$control->listar();\n";
+		// $text .= "	if(!empty(\$lista)) {\n";
+		// $text .= "		echo json_encode(\$lista);\n";
+		// $text .= "	}\n";
+		$text .= "	\$response = \$control->listar();\n";
+		$text .= "	echo json_encode(\$response);\n";
 		$text .= "}\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
@@ -150,8 +156,10 @@ Class createRest {
 		$text .= 		$attrs."\n";
 		$text .= "	);\n";
 		$text .= "	\$control = new ".ucfirst($obj['table']['name'])."Control(\$obj);\n";
-		$text .= "	\$id = \$control->atualizar();\n";
-		$text .= "	echo \$id;\n";
+		// $text .= "	\$id = \$control->atualizar();\n";
+		// $text .= "	echo \$id;\n";
+		$text .= "	\$response = \$control->atualizar();\n";
+		$text .= "	echo json_encode(\$response);\n";
 		$text .= "}\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
@@ -164,7 +172,8 @@ Class createRest {
 		$text .= "	\$banco = new ".ucfirst($obj['table']['name'])."();\n";
 		$text .= "	\$banco->setId(\$data['id']);\n";
 		$text .= "	\$control = new ".ucfirst($obj['table']['name'])."Control(\$banco);\n";
-		$text .= "	echo \$control->deletar();\n";
+		// $text .= "	echo \$control->deletar();\n";
+		$text .= "	echo json_encode(\$control->deletar());\n";
 		$text .= "}\n\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));

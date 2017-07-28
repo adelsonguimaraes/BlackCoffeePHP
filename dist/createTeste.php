@@ -170,7 +170,7 @@ Class createTeste {
 				$text .= "					if(data) {\n";
 				$text .= "						var data = $.parseJSON(data);\n";
 				$text .= "						var collection = '';\n";
-				$text .= "						$.each(data, function (index, value) {\n";
+				$text .= "						$.each(data.data, function (index, value) {\n";
 				$text .= "						collection += '<option value=\"'+value.id+'\">'+JSON.stringify(value)+'</option>';\n";
 				$text .= "						});\n";
 				$text .= "						$('#".$key['Field']."_cadastrar').append(collection);\n";
@@ -191,7 +191,7 @@ Class createTeste {
 		$text .= "						if(data) {\n";
 		$text .= "							var data = \$.parseJSON(data);\n";
 		$text .= "							var collection = '';\n";
-		$text .= "							$.each(data, function (index, value) {\n";
+		$text .= "							$.each(data.data, function (index, value) {\n";
 		$text .= "								collection += '<tr>';\n";
 		$text .= "								$.each(value, function (index2, value2) {\n";
 		$text .= "									if(value2 !== null && typeof(value2)==='object') {\n";
@@ -226,13 +226,14 @@ Class createTeste {
 		$text .= "							'data': dados\n";
 		$text .= "						},\n";
 		$text .= "						success: function (data) {\n";
-		$text .= "							if(data) {\n";
-		$text .= "								data = JSON.parse(data);\n";
-		
+		$text .= "							data = JSON.parse(data);\n";
+		$text .= "							if(data.success) {\n";
+		$text .= "								data = data.data;\n";
 		foreach ($obj['table']['fields'] as $key) {
 			if($key['Field'] != "datacadastro" && $key['Field'] != "dataedicao") {
 				if(!empty($key['fk'])) {
-					$text .= "								$(\"#".$key['Field']."_cadastrar\").val(data.obj".$key['fk'].".id);\n";
+					// $text .= "								$(\"#".$key['Field']."_cadastrar\").val(data.obj".$key['fk'].".id);\n";
+					$text .= "								$(\"#".$key['Field']."_cadastrar\").val(data.id".$key['fk'].");\n";
 				}else{
 					$text .= "								$(\"#".$key['Field']."_cadastrar\").val(data.".$key['Field'].");\n";
 				}
