@@ -2,11 +2,11 @@
 
 class Conexao{	
 	private $con;
-	private $server = 'dbpcepro.mysql.uhserver.com';
+	private $server = '';
     private $port = '';
-    private $db = 'dbpcepro';
-    private $user = 'pceroot';
-    private $pass = 'R@@tpc3';
+    private $db = '';
+    private $user = '';
+    private $pass = '';
 
 	protected function __construct(){
 
