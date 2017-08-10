@@ -18,7 +18,7 @@
   varre os campos e em seguida gera as classes que são necessárias em uma estrutura MVC de PHP para utilização de 
   um CRUD, Cadastro, Atualização, Listagem e Remoção de valores do banco de dados.
 
-# O que eu precio para rodar a ferramenta ?
+# O que eu preciso para rodar a ferramenta ?
   É necessário ter um ambiente de programação PHP com um servidor como APACHE rodando local no computador, é recomendado
   que o usuário tenha um pouco de conhecimento com PHP, também pode ser utilizado o XAMMP ou WAMMP para facilitar esse
   processo, é muito fácil encontrar tutoriais na internet explicando como fazer esse processo.
