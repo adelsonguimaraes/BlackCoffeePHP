@@ -14,7 +14,7 @@ Class createConnection {
 		if(!file_exists('../src')) mkdir('../src');
 		if(!file_exists('../src/util')) mkdir('../src/util');
 		
-		$fp = fopen("../src/util/conexao.php", "a");
+		$fp = fopen("../src/util/Conexao.php", "a");
 		
 		$text = "<?php\n";
 
