@@ -2,11 +2,14 @@
   Framework gerador de classes
   v2.0
   Atualizado 10/08/2017
+  Ferramenta Livre.
 
 # Quem desenvolve ?
   Olá! Eu sou Adelson Guimarães criador deste projeto, seja bem vindo!
   Trabalho desde de 2015 com desenvolvimento em PHP, JavaDesktop, Mobile com Ionic, tenho conhecimento também com BootStrap,
   AngularJS, JQuery.
+  
+  Contato: adelsonguimaraes@gmail.com
 
 # O que é o BlackCoffee ?
   O projeto é baseado em funcionalidade "ormlite", ele a partir de um banco de dados MySQL, acessa as tabelas, 
