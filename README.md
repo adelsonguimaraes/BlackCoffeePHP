@@ -18,6 +18,11 @@
   varre os campos e em seguida gera as classes que são necessárias em uma estrutura MVC de PHP para utilização de 
   um CRUD, Cadastro, Atualização, Listagem e Remoção de valores do banco de dados.
 
+# O que eu precio para rodar a ferramenta ?
+  É necessário ter um ambiente de programação PHP com um servidor como APACHE rodando local no computador, é recomendado
+  que o usuário tenha um pouco de conhecimento com PHP, também pode ser utilizado o XAMMP ou WAMMP para facilitar esse
+  processo, é muito fácil encontrar tutoriais na internet explicando como fazer esse processo.
+
 # Qual as bases de padrão utilizados nesse projeto ?
   Esse projeto foi criado por uma grande necessidade pessoal em agilizar o processo de criação de classes backend dos projetos,
   dependendo do tamanho do banco de dados e sua quantidades de tabelas, a criação manual das classes poderia levar até em torno
