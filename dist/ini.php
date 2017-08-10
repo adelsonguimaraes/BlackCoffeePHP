@@ -75,16 +75,19 @@ switch ($data['metodo']) {
 	case 'criarSuperDAO':
 		criarSuperDAO($obj);
 		break;
+	case 'destroySrc':
+		destroySrc();
+		break;
 }
 
 function createObj ($data) {
 	return new Config (
-		$data['host'], //host
-		$data['user'], //usuario
-		$data['senha'], //senha
-		$data['banco'], //banco
-		$data['table'], // table
-		$data['doc'] //doc
+		(!empty($data['host'])) ? $data['host'] : null, //host
+		(!empty($data['user'])) ? $data['user'] : null, //usuario
+		(!empty($data['senha'])) ? $data['senha'] : null, //senha
+		(!empty($data['banco'])) ? $data['banco'] : null, //banco
+		(!empty($data['table'])) ? $data['table'] : null, // table
+		(!empty($data['doc'])) ? $data['doc'] : null //doc
 	);
 }
 
@@ -92,7 +95,7 @@ function verificaConexao ($obj) {
 	$con = @mysqli_connect($obj->host, $obj->user, $obj->senha, $obj->banco);
 	
 	if (!$con) {
-		die(json_encode(array("success"=>false, "msg"=>"Hove erro de comunicação com o banco de dados!")));
+		die(json_encode(array("success"=>false, "msg"=>"Houve erro de comunicação com o banco de dados!")));
 	}
 
 	$sql = sprintf("SELECT TABLE_NAME as 'table' FROM information_schema.TABLES t where t.TABLE_SCHEMA = '%s'", $obj->banco);
@@ -221,6 +224,17 @@ function criarSuperDAO ($obj) {
 	echo json_encode(array("success"=>true,"msg"=>"Criação da Classe \"SuperDAO\"", "data"=>$obj));
 }
 
-
+function destroySrc () {
+	$directory = '../src';
+	foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory,FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST) as $file){
+		$file->isFile() ? unlink($file->getPathname()) : rmdir($file->getPathname());
+	}
+	rmdir($directory);
+	if(file_exists('../src')) {
+		echo json_encode(array("success"=>false,"msg"=>"Não foi possível Destruir os arquivos, talvez seja necessário fazer o processo Manualmente!", "data"=>''));
+	}else{
+		echo json_encode(array("success"=>true,"msg"=>"Diretório \"src\"Arquivos foram destruídos com sucesso!", "data"=>''));
+	}
+}
 
 ?>

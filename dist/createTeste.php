@@ -30,6 +30,7 @@ Class createTeste {
 		$text .= "	<style type=\"text/css\">\n";
 		$text .= "		body {\n";
 		$text .= "			background: #ddd;\n";
+		$text .= "			background-image: url('../../dist/img/txtmad2.jpg');\n";
 		$text .= "		}\n";
 		$text .= "		.cx-msg {\n";
 		$text .= "			width: 100%;\n";
@@ -49,6 +50,7 @@ Class createTeste {
 
 		$text .= "</head>\n";
 		$text .= "<body>\n";
+		$text .= "<div class=\"float-logo\"></div>\n";
 		$text .= "	<nav class=\"navbar navbar-inverse navbar-fixed-top\" role=\"navigation\">\n";
     	$text .= "		<div class=\"container-fluid\">\n";
     	$text .= "			<div class=\"navbar-header\">\n";
@@ -146,7 +148,7 @@ Class createTeste {
 		$text .= "	<nav class=\"navbar navbar-inverse navbar-fixed-bottom\" role=\"navigation\">\n";
     	$text .= "		<footer>\n";
 	    $text .= "		    <div class=\"container\" style=\"padding-top:15px; text-align:center; color:#fff;\">\n";
-	    $text .= "	        	<p>BlackCoffeePHP 2016 - by Adelson Guimarães</p>\n";
+	    $text .= "	        	<p>BlackCoffeePHP 2017 - by Adelson Guimarães</p>\n";
 	    $text .= "	    	</div>\n";
 	    $text .= "		</footer>\n";
 		$text .= "	</nav>\n";
@@ -311,7 +313,7 @@ Class createTeste {
 		$text .= "	</script>\n";
 
 		$text .= "</body>\n";
-		$text .= "<!-- Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães -->\n";
+		$text .= "<!-- Classe gerada com BlackCoffeePHP 2.0 - by Adelson Guimarães -->\n";
 		$text .= "</html>\n";
 
 

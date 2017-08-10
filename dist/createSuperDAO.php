@@ -58,7 +58,7 @@ Class createSuperDAO {
 		
 		$text = "}\n\n";
 
-		$text .= "// Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães\n?>";
+		$text .= "// Classe gerada com BlackCoffeePHP 2.0 - by Adelson Guimarães\n?>";
 
 		$escreve = fwrite($fp, $text, strlen($text));
 

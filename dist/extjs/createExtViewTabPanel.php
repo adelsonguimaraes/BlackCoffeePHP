@@ -47,7 +47,7 @@ Class createExtViewTabPanel {
 		$text .= "	}]\n";
 		$text .= "});\n";
 
-		$text .= "\n// Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães\n";
+		$text .= "\n// Classe gerada com BlackCoffeePHP 2.0 - by Adelson Guimarães\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
 

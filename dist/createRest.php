@@ -63,7 +63,7 @@ Class createRest {
 		$this->writeAtualizar ($fp, $obj);
 		$this->writeDeletar ($fp, $obj);
 
-		$text = "\n// Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães\n";
+		$text = "\n// Classe gerada com BlackCoffeePHP 2.0 - by Adelson Guimarães\n";
 
 		$text .= "?>";
 

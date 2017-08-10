@@ -12,10 +12,14 @@
 
 	<style type="text/css">
 		body {
-			background: #ddd;
+			/* background: #2f3033; */
+			background-image: url('dist/img/txtmad2.jpg');
 		}
 		.logo {
-			background: #e6e6e6;
+			 /* background: #e6e6e6;  */
+			font-family: "Comic Sans MS", "Comic Sans", cursive;
+			background-image: url('dist/img/txtmad2.jpg');
+			/* color: #fff; */
 			width: 100%;
 			height: 100%;
 			position: fixed;
@@ -27,19 +31,55 @@
 			padding: 50px;
 			height: 500px;
 		}
+		.float-logo {
+            background: url('dist/img/bcphplogo.png') no-repeat;
+            background-size: 120px;
+            background-position: 50%;
+            /*border: 1px solid;*/
+            height: 120px;
+            width: 120px;
+            padding: 10px;
+            border-radius:50px;
+            margin: 0 auto;
+            position: fixed;
+            right: 1%;
+			 /* top: 1%;   */
+			bottom: 6%;  
+			z-index: 1050;
+            color: black;
+		}
+		@media only screen and (max-width: 768px) {
+			/* For mobile phones: */
+			[class*="float-"] {
+				background-size: 50px;
+				height: 50px;
+				width: 50px;
+				top: 1%;
+				z-index: 1050;
+			}
+			.logo > img {
+				top:500;
+				padding: 50px;
+				height: 300px;
+			}
+		}
 	</style>
 
 </head>
 <body ng-controller="main">
+	<div class="float-logo"></div>
 	<div class="logo" ng-if="splash">
 		<br><br>
 		<h1> Bem vindo </h1>
-		<img src="dist/img/blackcoffee.png">
-		<h1>2016 - Versão 1.0 </h1>
+		<h1> Black Coffee PHP </h1>
+		<h4>Criado por Adelson Guimarães</h4>
+		<img src="dist/img/bcphplogo.png">
+		<h1>2017 - Versão 2.0 </h1>
+		<small>Atualizado em 10/08/2017</small>
 	</div>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     	<div class="container" style="padding-top:15px; text-align:center; color:#fff;">
-	         <h4>BlackCoffeePHP 1.0</h4>
+			<h4>BlackCoffeePHP 2.0</h4>
 	    </div>
 	</nav>
 	<br><br><br><br><br>
@@ -68,7 +108,30 @@
 			</div>
 		</div>
 	</div>
-	<div class="container" ng-if="!proccess">
+	<div class="container" ng-if="!proccess && srcexist">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Atenção!</h3>
+			</div>
+			<div class="panel-body">
+				<form>
+					<h3> Parece que existem arquivos de um projeto gerado anteriormente, o que deseja fazer? <small>
+					<hr>
+					<div class="form-group" align=''>
+						<button class="btn btn-primary btn-lg btn-block" ng-click="visitHome()">
+							Consultar Home.
+							<i class="glyphicon glyphicon-home"></i>
+						</button>
+						<button class="btn btn-danger btn-lg btn-block" ng-click="destroySrc()">
+							Destruir Projeto.
+							<i class="glyphicon glyphicon-remove"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container" ng-if="!proccess && !srcexist">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3>Configurações do Sistema</h3>
@@ -93,7 +156,7 @@
 							<input type="text" class="form-control" id="user" name="user" ng-model="conf.user">
 						</div>
 						<div class="form-group">
-							Senha <input type="text" class="form-control" id="senha" name="senha" ng-model="conf.senha">
+							Senha <input type="password" class="form-control" id="senha" name="senha" ng-model="conf.senha">
 						</div>
 						<div class="form-group">
 							Nome do Banco  <span style="color:red;">*</span>
@@ -193,14 +256,14 @@
 					</ul>
 				</div>
 				<div class="panel-footer">
-					BlackCoffeePHP 1.0
+					BlackCoffeePHP 2.0
 				</div>
 			</div>
 	</div>
 	<br><br><br><br><br>
 	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
     	<div class="container" style="padding-top:15px; text-align:center; color:#fff;">
-	         BlackCoffeePHP 2016 - by Adelson Guimarães
+	         BlackCoffeePHP 2017 - by Adelson Guimarães
 	    </div>
 	</nav>
 
@@ -216,11 +279,75 @@
 		angular.module("blackcoffeephp").controller("main", function ($scope, $http, $timeout) {
 			function splash () {
 				$scope.splash = true;
+				var audio = new Audio('dist/songs/intro.mp3');
+				audio.volume = '1.0';
+				audio.play();
 				$timeout(function () {
 					$scope.splash = false;
 				},3000);
 			}
 			splash();
+
+			function verifySrcExist () {
+				var http = new XMLHttpRequest();
+				http.open('HEAD', 'src/teste', false);
+				http.send();
+				if ( http.status != 404 ) {
+					$scope.srcexist = true;
+				}
+			};
+			verifySrcExist();
+
+			$scope.visitHome = function () {
+				window.location.replace('src/teste');
+			}
+			$scope.destroySrc = function () {
+				$scope.srcexist = false;
+				$scope.proccess = true;
+				
+				var data = {
+					'metodo':'destroySrc'
+				};
+				
+				$http({
+		            method: 'POST',
+		            url: "dist/ini.php",
+		            data: {data : data}
+		        })
+				.then(function successCallback(response) {
+	                var data = response.data;
+	                
+					if(data.success){
+						var andamento = {
+							"msg": "O processo de destruição foi finalizado, em 5 segundos o Sistema será reiniciado.",
+							"bgclass" : "bg-info",
+							"textclass": "text-info",
+							"iconclass": "glyphicon-open-file"
+						};
+						$scope.andamento.push(andamento);
+						
+						var audio = new Audio('dist/songs/success.mp3');
+		   				audio.volume = '0.1';
+		   				audio.play();
+
+						$timeout(function() {window.location.replace('index.html')}, 5000);
+					}else{
+						var andamento = {
+	                		"msg": data.msg,
+	                		"bgclass" : "bg-danger",
+	                		"textclass": "text-danger",
+	                		"iconclass": "glyphicon-remove"
+	                	};
+
+	                	$scope.andamento.push(andamento); 
+	                	$scope.error = true;
+
+	                	var audio = new Audio('dist/songs/danger.mp3');
+		   				audio.volume = '0.1';
+		   				audio.play();
+					}
+				});
+			}
 
 			function startConfig () {
 				$scope.andamento = [];

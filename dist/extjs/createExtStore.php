@@ -41,7 +41,7 @@ Class createExtStore {
 		$text .= "	proxy: {\n";
 		$text .= "		type: 'rest',\n";
 		
-		$text .= "		url: 'http://api.akto.com.br/src/rest/".$obj['table']['name'].".php',\n";
+		$text .= "		url: 'http://127.0.0.1/src/rest/".$obj['table']['name'].".php',\n";
 		
 		$text .= "		reader: {\n";
 		$text .= "			type: 'json',\n";
@@ -56,7 +56,7 @@ Class createExtStore {
 		$text .= "	}\n";
 		$text .= "});\n";
 		
-		$text .= "\n// Classe gerada com BlackCoffeePHP 1.0 - by Adelson Guimarães\n";
+		$text .= "\n// Classe gerada com BlackCoffeePHP 2.0 - by Adelson Guimarães\n";
 
 		$escreve = fwrite($fp, $text, strlen($text));
 
