@@ -3,6 +3,7 @@
   - v2.0.
   - Atualizado 10/08/2017.
   - Ferramenta Livre.
+  - Atualmente só funciona para banco MySQL.
   - Demo: http://agmtiservicos.com.br/BlackCoffeePHP/
 
 # Quem desenvolve ?
