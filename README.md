@@ -1,8 +1,9 @@
 # BlackCoffeePHP 2017
-  - Framework gerador de classes
-  - v2.0
-  - Atualizado 10/08/2017
+  - Framework gerador de classes.
+  - v2.0.
+  - Atualizado 10/08/2017.
   - Ferramenta Livre.
+  - Demo: http://agmtiservicos.com.br/BlackCoffeePHP/
 
 # Quem desenvolve ?
   Olá! Eu sou Adelson Guimarães criador deste projeto, seja bem vindo!
