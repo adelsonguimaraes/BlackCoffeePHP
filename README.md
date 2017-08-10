@@ -16,7 +16,7 @@
   varre os campos e em seguida gera as classes que são necessárias em uma estrutura MVC de PHP para utilização de 
   um CRUD, Cadastro, Atualização, Listagem e Remoção de valores do banco de dados.
 
-# Qual as bases de padrão utiliados nesse projeto ?
+# Qual as bases de padrão utilizados nesse projeto ?
   Esse projeto foi criado por uma grande necessidade pessoal em agilizar o processo de criação de classes backend dos projetos,
   dependendo do tamanho do banco de dados e sua quantidades de tabelas, a criação manual das classes poderia levar até em torno
   de 2 semanas, e com a criação do BlackCoffee esse tempo foi completamente reduzido em 90%, pois a ferramenta cria as classes
