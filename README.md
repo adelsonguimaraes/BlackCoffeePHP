@@ -22,6 +22,7 @@
   É necessário ter um ambiente de programação PHP com um servidor como APACHE rodando local no computador, é recomendado
   que o usuário tenha um pouco de conhecimento com PHP, também pode ser utilizado o XAMMP ou WAMMP para facilitar esse
   processo, é muito fácil encontrar tutoriais na internet explicando como fazer esse processo.
+  Também é preciso que o MySql do servidor seja 5.2 ou superior, pois a ferramenta utiliza o mysqli.
 
 # Qual as bases de padrão utilizados nesse projeto ?
   Esse projeto foi criado por uma grande necessidade pessoal em agilizar o processo de criação de classes backend dos projetos,
