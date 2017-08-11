@@ -20,7 +20,7 @@
 
 # O que eu preciso para rodar a ferramenta ?
   É necessário ter um ambiente de programação PHP com um servidor como APACHE rodando local no computador, é recomendado
-  que o usuário tenha um pouco de conhecimento com PHP, também pode ser utilizado o XAMMP ou WAMMP para facilitar esse
+  que o usuário tenha um pouco de conhecimento com PHP, também pode ser utilizado o XAMPP ou WAMP para facilitar esse
   processo, é muito fácil encontrar tutoriais na internet explicando como fazer esse processo.
   Também é preciso que o MySql do servidor seja 5.2 ou superior, pois a ferramenta utiliza o mysqli.
 
