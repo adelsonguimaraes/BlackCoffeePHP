@@ -18,6 +18,7 @@ require_once ("createControl.php");
 require_once ("createRest.php");
 require_once ("createTeste.php");
 require_once ("createIndexTeste.php");
+require_once ("zip.php");
 //ext
 require_once ("extjs/createExtModel.php");
 require_once ("extjs/createExtStore.php");
@@ -74,6 +75,9 @@ switch ($data['metodo']) {
 		break;
 	case 'criarSuperDAO':
 		criarSuperDAO($obj);
+		break;
+	case 'zipar':
+		zipar($obj);
 		break;
 	case 'destroySrc':
 		destroySrc();
@@ -222,6 +226,11 @@ function criarResolve ($obj) {
 function criarSuperDAO ($obj) {
 	new createSuperDAO($obj);
 	echo json_encode(array("success"=>true,"msg"=>"Criação da Classe \"SuperDAO\"", "data"=>$obj));
+}
+
+function zipar ( $obj ) {
+	new Zip($obj);
+	echo json_encode(array("success"=>true,"msg"=>"Compactação de Projeto", "data"=>$obj));
 }
 
 function destroySrc () {
