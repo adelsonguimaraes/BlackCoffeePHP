@@ -53,7 +53,7 @@
   as classes que foram criadas e ver se a comunicação entre elas está com boa funcionalidade.
   
 # Qualquer pessoa pode utilizar está ferramenta ?
-  Está ferranta pe muito simples de ser utilizada, porém é necessário que o usuário tenha o mínimo conhecimento de PHP, REST,
+  Está ferranta é muito simples de ser utilizada, porém é necessário que o usuário tenha o mínimo conhecimento de PHP, REST,
   MVC, JQUERY.
   
 # Para qual tipo de usuário está ferramenta é recomendada ?
