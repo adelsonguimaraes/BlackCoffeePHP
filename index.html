@@ -480,6 +480,55 @@
 				startConfig();
 			}
 		});
+
+		/*
+			Indexed DB
+		*/
+		function indenxa () {
+
+			var myComics = [
+				{id: 1, title: "Turma da Mônica: A volta de Mr. Bento", published: "2014"},
+				{id: 2, title: "Liga da Justiça: A morte de The Flash", published: "2005"},
+				{id: 3, title: "Batman: A piada fatal", published: "2012"},
+				{id: 4, title: "Death Note Volume 1", published: "2007"}
+			];
+
+			if ( window.indexedDB ) {
+				var request = indexedDB.open("testes", 1);
+
+				request.onerror = function (e) {
+					alert( "DataBase Error" + e.target.errorCode );
+				};
+
+				request.onupgradeneeded = function (e) {
+					console.log(e);
+					var db = e.target.result;
+					var objectStore = db.createObjectStore("comics", {keyPath: "id"});
+					objectStore.createIndex("title", "title", {unique: false});
+					objectStore.transaction.oncomplete = function (e) {
+						var store  = db.transaction(["comics"], "readwrite").objectStore("comics");
+						for ( var i = 0; i < myComics.length; i++) {
+							store.add(myComics[i]);
+						}
+					}
+
+					var t = db.transaction(["testes"]);
+					var ob = t.objecStore("comics");
+					var r = ob.get('1');
+					console.log( r );
+
+				};
+
+				request.onsuccess = function ( e ) {
+					// console.log( request.result );
+				};
+			}else{
+				console.log("Not Supported");
+			}
+		};
+
+		// indenxa();
+		
 	</script>
 </body>
 </html>
