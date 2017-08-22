@@ -1,0 +1,12 @@
+{
+    "short_name" : "MyWebApp",
+    "name" : "PWA Expirence",
+    "icons" : [
+        {
+            "src": "dist/img/icon.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "start_url": "index.html?launcher=true"
+}

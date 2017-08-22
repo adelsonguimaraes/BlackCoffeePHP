@@ -10,6 +10,8 @@
 	
 	<link rel="stylesheet" href="dist/libs/css/datetimepicker/datetimepicker.css">
 
+	<!-- <link rel="manifest" href="manifest.json"> -->
+
 	<style type="text/css">
 		body {
 			/* background: #2f3033; */
@@ -512,10 +514,10 @@
 						}
 					}
 
-					var t = db.transaction(["testes"]);
-					var ob = t.objecStore("comics");
-					var r = ob.get('1');
-					console.log( r );
+					// var t = db.transaction(["testes"]);
+					// var ob = t.objecStore("comics");
+					// var r = ob.get('1');
+					// console.log( r );
 
 				};
 
@@ -528,6 +530,24 @@
 		};
 
 		// indenxa();
+
+		function serviceWork () {
+			// testando se existe suport
+			if ( 'serviceWorker' in navigator ) {
+				window.addEventListener('load', function() {
+					navigator.serviceWorker.register('dist/libs/js/serviceworker/sw.js').then(function() {
+						console.log( 'ServiceWorker registration Success!' );
+					}).catch(function(err){
+						console.log( 'ServiceWorker registration failed' + err );
+					}),
+					navigator.serviceWorker.oncontrollerchange = function () {
+						console.log('Refresh to see the newest content');
+					}
+				});
+			}
+		};
+
+		// serviceWork();
 		
 	</script>
 </body>
