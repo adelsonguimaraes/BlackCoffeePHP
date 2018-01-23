@@ -183,7 +183,7 @@
 							Dono do Produto (P.O): <input type="text" class="form-control" id="po" name="po"  ng-model="conf.doc.po">
 						</div>
 						<div class="form-group">
-							Data Inicial: <input type="text" class="form-control" id="datainicio" name="datainicio"  ng-model="conf.doc.datainicio">
+							Data Inicial: <input type="date" class="form-control" id="datainicio" name="datainicio"  ng-model="conf.doc.datainicio">
 							
 						</div>
 						<div class="form-group">
@@ -367,7 +367,7 @@
 					doc: {
 						projeto : "",
 						po : "",
-						datainicio : "",
+						datainicio : new Date(),
 						equipe : []
 					}
 				}
@@ -393,6 +393,10 @@
 				];
 
 				$scope.proccess = true;
+
+				// trata data
+				var dt = new Date(obj.doc.datainicio);
+				obj.doc.datainicio = dt.getDate() + '/' + (dt.getMonth()+1 < 10) ? '0'+(+dt.getMonth()+1): dt.getMonth() + '/' + dt.getFullYear();
 
 				$http({
 		            method: 'POST',
@@ -482,72 +486,6 @@
 				startConfig();
 			}
 		});
-
-		/*
-			Indexed DB
-		*/
-		function indenxa () {
-
-			var myComics = [
-				{id: 1, title: "Turma da Mônica: A volta de Mr. Bento", published: "2014"},
-				{id: 2, title: "Liga da Justiça: A morte de The Flash", published: "2005"},
-				{id: 3, title: "Batman: A piada fatal", published: "2012"},
-				{id: 4, title: "Death Note Volume 1", published: "2007"}
-			];
-
-			if ( window.indexedDB ) {
-				var request = indexedDB.open("testes", 1);
-
-				request.onerror = function (e) {
-					alert( "DataBase Error" + e.target.errorCode );
-				};
-
-				request.onupgradeneeded = function (e) {
-					console.log(e);
-					var db = e.target.result;
-					var objectStore = db.createObjectStore("comics", {keyPath: "id"});
-					objectStore.createIndex("title", "title", {unique: false});
-					objectStore.transaction.oncomplete = function (e) {
-						var store  = db.transaction(["comics"], "readwrite").objectStore("comics");
-						for ( var i = 0; i < myComics.length; i++) {
-							store.add(myComics[i]);
-						}
-					}
-
-					// var t = db.transaction(["testes"]);
-					// var ob = t.objecStore("comics");
-					// var r = ob.get('1');
-					// console.log( r );
-
-				};
-
-				request.onsuccess = function ( e ) {
-					// console.log( request.result );
-				};
-			}else{
-				console.log("Not Supported");
-			}
-		};
-
-		// indenxa();
-
-		function serviceWork () {
-			// testando se existe suport
-			if ( 'serviceWorker' in navigator ) {
-				window.addEventListener('load', function() {
-					navigator.serviceWorker.register('dist/libs/js/serviceworker/sw.js').then(function() {
-						console.log( 'ServiceWorker registration Success!' );
-					}).catch(function(err){
-						console.log( 'ServiceWorker registration failed' + err );
-					}),
-					navigator.serviceWorker.oncontrollerchange = function () {
-						console.log('Refresh to see the newest content');
-					}
-				});
-			}
-		};
-
-		// serviceWork();
 		
 	</script>
 </body>
