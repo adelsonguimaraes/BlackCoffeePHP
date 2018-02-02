@@ -275,6 +275,9 @@
 	<script src="dist/libs/js/angular/angular.min.js"></script>
 	<script src="dist/libs/js/datetimepicker/datetimepicker.js"></script>
 	<script src="dist/libs/js/datetimepicker/datetimepicker.templates.js"></script>
+
+	<script type="text/javascript" src="dist/libs/js/moment/moment.min.js"></script>
+	<script type="text/javascript" src="dist/libs/js/moment/moment-timezone.js"></script>
 	
 	<script type="text/javascript">
 		angular.module("blackcoffeephp", []);
@@ -395,8 +398,7 @@
 				$scope.proccess = true;
 
 				// trata data
-				var dt = new Date(obj.doc.datainicio);
-				obj.doc.datainicio = dt.getDate() + '/' + (dt.getMonth()+1 < 10) ? '0'+(+dt.getMonth()+1): dt.getMonth() + '/' + dt.getFullYear();
+				var dt = moment(obj.doc.datainicio).format('DD/MM/YYYY');
 
 				$http({
 		            method: 'POST',
