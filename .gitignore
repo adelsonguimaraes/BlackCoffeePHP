@@ -1,0 +1,4 @@
+# ignora os arquivos com extensões 
+# .gitignore
+# ignora quaisquer diretórios chamados "src"
+src/

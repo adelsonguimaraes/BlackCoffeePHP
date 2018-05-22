@@ -96,6 +96,7 @@ function createObj ($data) {
 }
 
 function verificaConexao ($obj) {
+
 	$con = @mysqli_connect($obj->host, $obj->user, $obj->senha, $obj->banco);
 	
 	if (!$con) {
