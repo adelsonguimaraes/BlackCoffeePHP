@@ -82,6 +82,9 @@ switch ($data['metodo']) {
 	case 'destroySrc':
 		destroySrc();
 		break;
+	case 'carregaDBs':
+		carregaDBs($obj);
+		break;
 }
 
 function createObj ($data) {
@@ -245,6 +248,29 @@ function destroySrc () {
 	}else{
 		echo json_encode(array("success"=>true,"msg"=>"Diretório \"src\"Arquivos foram destruídos com sucesso!", "data"=>''));
 	}
+}
+
+function carregaDBs ($obj) {
+	$con = @mysqli_connect($obj->host, $obj->user, $obj->senha, $obj->banco);
+	
+	if (!$con) {
+		die(json_encode(array("success"=>false, "msg"=>"Houve erro de comunicação com o banco de dados!")));
+	}
+
+	$sql = "SHOW SCHEMAS";
+
+	$result = mysqli_query($con, $sql);
+
+	if(!$result) {
+		die("Erro: " . mysqli_error($con));
+	}
+
+	$dbs = array();
+	while ($row = mysqli_fetch_assoc($result)) {
+		array_push($dbs, $row);
+	}
+
+	echo json_encode(array("success"=>true,"msg"=>"sucesso!", "data"=>$dbs));
 }
 
 ?>

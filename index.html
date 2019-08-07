@@ -161,8 +161,14 @@
 							Senha <input type="password" class="form-control" id="senha" name="senha" ng-model="conf.senha">
 						</div>
 						<div class="form-group">
-							Nome do Banco  <span style="color:red;">*</span>
-							<input type="text" class="form-control" id="banco" name="banco"  ng-model="conf.banco">
+							Selecione o Banco  <span style="color:red;">*</span>
+							<div style="display:flex;">
+								<select id="bancos" class="form-control" ng-options="obj.Database as obj.Database for obj in bancos" ng-model="conf.banco" ng-disabled="bancos.length<=0">
+									<!-- <option values="">Selecione um banco</option> -->
+								</select>
+								<button type="button" class="btn btn-default" ng-click="carregaDBs(conf)">Carregar</button>
+							</div>
+							<!-- <input type="text" class="form-control" id="banco" name="banco"  ng-model="conf.banco"> -->
 						</div>
 						<h3>Front-end <small> - Framework front-end que será utilizado nas telas</small></h3>
 						<hr>
@@ -354,10 +360,47 @@
 				});
 			}
 
+			$scope.bancos = [];
+			$scope.carregaDBs = function (obj) {
+				obj.metodo = 'carregaDBs';
+				
+				$http({
+		            method: 'POST',
+		            url: "dist/ini.php",
+		            data: {data : obj}
+		        })
+				.then(function successCallback(response) {
+	                var data = response.data;
+					
+					if(data.success){
+						$scope.bancos = data.data;
+						$scope.bancos.unshift({'Database':'Selecione um Banco'});
+						$scope.conf.banco = $scope.bancos[0].Database;
+					}else{
+						// var andamento = {
+						// 	"msg": data.msg,
+						// 	"bgclass": "bg-danger",
+						// 	"textclass": "text-danger",
+						// 	"iconclass": "glyphicon-remove"
+						// };
+
+						// $scope.andamento.push(andamento);
+						// $scope.error = true;
+
+						// var audio = new Audio('dist/songs/danger.mp3');
+						// audio.volume = '0.1';
+						// audio.play();
+
+						alert(data.msg);
+					}
+				});
+			}
+
 			function startConfig () {
 				$scope.andamento = [];
 				$scope.proccess = false;
 				$scope.membro = [];
+				$scope.bancos = [];
 				$scope.conf = {
 					db : "mysql",
 					front : "jquery",
