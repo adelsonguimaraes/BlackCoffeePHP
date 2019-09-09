@@ -105,7 +105,7 @@ function verificaConexao ($obj) {
 	if (!$con) {
 		die(json_encode(array("success"=>false, "msg"=>"Houve erro de comunicação com o banco de dados!")));
 	}
-
+	
 	$sql = sprintf("SELECT TABLE_NAME as 'table' FROM information_schema.TABLES t where t.TABLE_SCHEMA = '%s'", $obj->banco);
 
 	$result = mysqli_query($con, $sql);
@@ -113,6 +113,7 @@ function verificaConexao ($obj) {
 	if(!$result) {
 		die("Erro: " . mysqli_error($con));
 	}
+
 
 	while ($row = mysqli_fetch_object($result)) {
 
@@ -132,7 +133,7 @@ function verificaConexao ($obj) {
 			if(!$resultKeys) {
 				die("Erro " . mysqli_error($con));
 			}
-			
+
 			while($row3 = mysqli_fetch_object($resultKeys)) {
 				if($row3->COLUMN_NAME == $row2->Field) {
 					$row2->fk = $row3->REFERENCED_TABLE_NAME;
@@ -145,6 +146,8 @@ function verificaConexao ($obj) {
 
 	}
 
+	// echo '<pre>';
+	// var_dump($obj->table);exit;
 	echo json_encode(array("success"=>true,"msg"=>"Conexao com o banco de dados estabilizada", "data"=>$obj));
 }
 
