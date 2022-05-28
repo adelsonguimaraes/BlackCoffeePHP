@@ -4,7 +4,27 @@
   - Atualizado 10/08/2017.
   - Ferramenta Livre.
   - Atualmente só funciona para banco MySQL.
-  - Demo: http://agmtiservicos.com.br/BlackCoffeePHP/
+
+# Instruções para rodar o projeto
+  Existem duas formas de rodar este projeto:
+  * A primeira você deve ter um ambiente php configurado e colocar esse projeto dentro do seu servidor e acessar via navegador
+  * A segunda é via docker, que é a mais prática devido todo ambiente já estar configurado e apenas ser necessário subir o container,
+  nesse caso também é necessário que tenha o docker e o docker-compose configurados na sua máquina.
+
+  Vamos fazer os passo para a forma via docker:
+  1. Clone este projeto na sua máquina
+  2. Via terminal navegue até a pasta do projeto
+  3. Dentro da raiz do projeto via terminal rode o seguinte
+  ```sh
+  docker-compose -f docker-compose/docker-compose.yaml up -d
+  ```
+  4. Se tudo estiver ok no seu ambiente os containers do projeto devem ser levantados, para verificar se os containers desse docker-compose estão up utilize o seguinte comando:
+  ```sh
+  docker-compose ps
+  ```
+  5. O projeto irá rodar na porta `3132`, então no seu navegador digite:
+  >localhost:3132
+  6. Se tudo deu certo você deve ver a interface do BlackCoffeePHP.
 
 # Quem desenvolve ?
   Olá! Eu sou Adelson Guimarães criador deste projeto, seja bem vindo!
