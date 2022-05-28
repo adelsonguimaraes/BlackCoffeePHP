@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  black-coffee-app:
+    build: ../
+    image: localhost:5000/black-coffee
+    container_name: black-coffee-app
+    restart: always
+    volumes:
+      - ../:/var/www/public
+    # depends_on: 
+    #   - black-coffee-db
+
+  vwa-nginx:
+    image: nginx:1.21.3-alpine
+    container_name: black-coffee-nginx
+    ports:
+       - 80:80
+    # expose:
+    #   - 80 # expondo a porta para o proxy
+    volumes:
+      - ../:/var/www/public
+      - ./nginx:/etc/nginx/conf.d
+    # environment:
+    #   LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+    #   VIRTUAL_HOST: ${VIRTUAL_HOST}
+    depends_on:
+      - black-coffee-app
+
+# networks:
+#   default:
+#     external:
+#       name: nginx-proxy
